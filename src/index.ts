@@ -13,7 +13,7 @@ export async function load(station:string, today:string) {
         from: "inline",
         config: {
           serverMode: "full",
-          url: "/tideapp/db/999-tides.db",
+          url: "../db/999-tides.db",
           requestChunkSize: 4096,
         },
       },
