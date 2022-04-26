@@ -51,11 +51,13 @@ function geoFindMe() {
 		station.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
 		var closest = lookup(latitude, longitude, nodes,1)[0];
 		let today = new Date().toISOString().slice(0, 10)
-    prettydate.textContent = moment().format('dddd, MMMM Do YYYY');
-		station.textContent = closest.station.replace("MODELLED","").replace("_", " ");
+    prettydate.textContent = moment().format('dddd, MMMM Do');
+		station.textContent = closest.station.replace("MODELLED","").replace(/_/gi, " ");
 		let result = await sql.load(closest.station, today);
 		console.log(result.map(x=>x.HIGH_TIDE));
-		tides.textContent = result.map(x=>x.HIGH_TIDE).join('\n');
+		tides.innerText = result.map(x=>x.HIGH_TIDE).join('\n');
+	  Array.from(document.getElementsByClassName("item")).forEach(x=>x.style.display = 'block');	
+    loading.style.display = "none";
 	}
 
 	function error() {

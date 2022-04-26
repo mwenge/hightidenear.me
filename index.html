@@ -4,8 +4,13 @@
 <script src="./dist/bundle.js"></script>
 <script src="./3rdparty/moment.min.js"></script>
 <script type="module" src="main.js"></script>
+<div class="banner">High Tides Near You Today</div>
 <div class="container">
-  <div class="item" id="station"></div>
-  <div class="item" id="prettydate"></div>
-  <div class="item" id="tides">Fetching high tides..</div>
+  <div class="centered">
+    <div class="item" id="prettydate"></div>
+    <br>
+    <div class="item" id="station"></div>
+    <div class="item" id="tides"></div>
+    <div class="item" id="loading" style="display: block;"><img src="assets/42.svg" height=160></div>
+  </div>
 </div>
