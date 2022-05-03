@@ -1,4 +1,8 @@
 # Building the DB
+
+```
+tide -f t -m l > 000-XTide-Stations.csv
+```
 Every now and then go to:
   https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.html
 

@@ -15,6 +15,7 @@ CREATE TABLE HIGH_TIDES (
 .separator ","
 --.import "000-IMI-TidePrediction_ce3d_f3ba_dd6b.csv" TIDES
 .import "510-high_tides.csv" HIGH_TIDES
+.import "060-high_tides.csv" HIGH_TIDES
 -- .import test.csv TIDES
 
 --create index indx_datetime on TIDES (DATE_TIME);
