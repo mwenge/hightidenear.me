@@ -15,7 +15,9 @@ function geoFindMe() {
 		var closest = lookup(latitude, longitude, nodes,1)[0];
 		let today = new Date().toISOString().slice(0, 10)
     prettydate.textContent = moment().format('dddd, MMMM Do');
-		station.textContent = closest.station.replace("MODELLED","").replace(/_/gi, " ");
+		station.textContent = closest.station.replace("MODELLED","")
+      .replace(" - READ flaterco.com/pol.html", " ")
+      .replace(/_/gi, " ");
 		let result = await sql.load(closest.station, today);
 		console.log(result.map(x=>x.HIGH_TIDE));
 		tides.innerText = result.map(x=>x.HIGH_TIDE).join('\n');
