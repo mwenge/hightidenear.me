@@ -44,7 +44,7 @@ levels = [
 ]
 
 # Identify the date and time of all all the peaks in the tide levels.
-ilocs_max = argrelextrema(np.array([k[2] for k in levels]), np.greater_equal, order=3)[0]
+ilocs_max = argrelextrema(np.array([k[2] for k in levels]), np.greater_equal, order=13)[0]
 # Remove any consecutive peaks, e.g. consecutive 5 minute intervals where the tide was high.
 hw_levels = [levels[n] for i, n in enumerate(ilocs_max) if n-1 > ilocs_max[i-1] or i == 0]
 
