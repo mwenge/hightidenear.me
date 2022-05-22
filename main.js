@@ -23,6 +23,15 @@ function geoFindMe() {
 		tides.innerText = result.map(x=>x.HIGH_TIDE).join('\n');
 	  Array.from(document.getElementsByClassName("item")).forEach(x=>x.style.display = 'block');	
     loading.style.display = "none";
+
+    share.style.display = "inline-block";
+    share.onclick = ()=> {
+      navigator.clipboard.writeText("High Tide " + prettydate.innerText + "\n" +
+        station.innerText + '\n' + 
+        tides.innerText + '\n' +
+        "https://hightidenear.me");
+      share.innerHTML = "Copied to Clipboard!";
+    }; 
 	}
 
 	function error() {
