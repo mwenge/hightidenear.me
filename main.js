@@ -35,11 +35,13 @@ function geoFindMe() {
 	}
 
 	function error() {
-		station.textContent = 'Unable to retrieve your location';
+    loading.style.display = "none";
+		tides.textContent = 'Unable to retrieve your location';
 	}
 
 	if(!navigator.geolocation) {
-		station.textContent = 'Geolocation is not supported by your browser';
+    loading.style.display = "none";
+		tides.textContent = 'Geolocation is not supported by your browser';
 	} else {
 		station.textContent = 'Locating…';
 		navigator.geolocation.getCurrentPosition(success, error);
