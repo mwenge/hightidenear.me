@@ -35,7 +35,7 @@ function geoFindMe() {
 	}
 
 	function error() {
-		status.textContent = 'Unable to retrieve your location';
+		station.textContent = 'Unable to retrieve your location';
 	}
 
 	if(!navigator.geolocation) {
