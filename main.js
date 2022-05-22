@@ -36,14 +36,15 @@ function geoFindMe() {
 
 	function error() {
     loading.style.display = "none";
-		tides.textContent = 'Unable to retrieve your location';
+    station.style.display = "block";
+		station.textContent = 'Unable to retrieve your location';
 	}
 
 	if(!navigator.geolocation) {
     loading.style.display = "none";
-		tides.textContent = 'Geolocation is not supported by your browser';
+    station.style.display = "block";
+		station.textContent = 'Geolocation is not supported by your browser';
 	} else {
-		station.textContent = 'Locating…';
 		navigator.geolocation.getCurrentPosition(success, error);
 	}
 
