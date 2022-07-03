@@ -1,7 +1,43 @@
 import { build, lookup } from "./3rdparty/sphere-knn/spherekd.js";
 import { stations } from "./stations.js";
+import { symbols } from "./icons.js";
 
 var nodes = build(stations);
+
+function formatTime(t) {
+  let tm = t.substring(t.indexOf('.')+1).trim();
+  let r = moment.utc(tm, "h a").format().toString();
+  return r;
+}
+
+function getWeatherData(forecast, tideInfo) {
+  let tideTime = formatTime(tideInfo.HIGH_TIDE);
+  let f = forecast.properties.timeseries;
+  let w = f.filter(x => x.time == tideTime);
+  if (!w.length) {
+    return tideInfo.HIGH_TIDE;
+  }
+  let temp = parseInt(w[0].data.instant.details.air_temperature, 10);
+  let symbol = w[0].data.next_1_hours.summary.symbol_code;
+  let icon = symbols[symbol];
+  let updatedTide = `${icon} ${temp}° ${tideInfo.HIGH_TIDE.substring(2)}`;
+  return updatedTide;
+}
+
+async function getWeather(station, predictions) {
+  let lat = station.lat;
+  let lon = station.lon;
+  let url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`
+	let response = await fetch(url);
+
+	if (!response.ok) { // if HTTP-status is 200-299
+		alert("HTTP-Error: " + response.status);
+    return;
+	}
+  // get the response body (the method explained below)
+  let json = await response.json();
+  tides.innerText = predictions.map(p => getWeatherData(json, p)).join('\n');
+}
 
 function geoFindMe() {
 
@@ -11,19 +47,24 @@ function geoFindMe() {
 		const latitude  = position.coords.latitude;
 		const longitude = position.coords.longitude;
 
-		station.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+    // Set the date.
 		var closest = lookup(latitude, longitude, nodes,1)[0];
 		let today = new Date().toISOString().slice(0, 10)
     prettydate.textContent = moment().format('dddd, MMMM Do');
+    
+    // Set the station name.
 		station.textContent = closest.station.replace("MODELLED","")
       .replace(" - READ flaterco.com/pol.html", " ")
       .replace(/_/gi, " ");
+
+    // Get the tides.
 		let result = await sql.load(closest.station, today);
-		console.log(result.map(x=>x.HIGH_TIDE));
 		tides.innerText = result.map(x=>x.HIGH_TIDE).join('\n');
+
 	  Array.from(document.getElementsByClassName("item")).forEach(x=>x.style.display = 'block');	
     loading.style.display = "none";
 
+    // Display the share button.
     share.style.display = "inline-block";
     share.onclick = ()=> {
       navigator.clipboard.writeText("High Tide " + prettydate.innerText + "\n" +
@@ -32,6 +73,9 @@ function geoFindMe() {
         "https://hightidenear.me");
       share.innerHTML = "Copied to Clipboard!";
     }; 
+
+    // Get the weather forecast.
+    getWeather(closest, result);
 	}
 
 	function error() {
@@ -49,5 +93,6 @@ function geoFindMe() {
 	}
 
 }
+
 geoFindMe();
 //sql.load();
