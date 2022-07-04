@@ -11,16 +11,16 @@ function formatTime(t) {
 }
 
 function getWeatherData(forecast, tideInfo) {
-  let tideTime = formatTime(tideInfo.HIGH_TIDE);
+  let tideTime = formatTime(tideInfo);
   let f = forecast.properties.timeseries;
   let w = f.filter(x => x.time == tideTime);
   if (!w.length) {
-    return tideInfo.HIGH_TIDE;
+    return tideInfo;
   }
   let temp = parseInt(w[0].data.instant.details.air_temperature, 10);
   let symbol = w[0].data.next_1_hours.summary.symbol_code;
   let icon = symbols[symbol];
-  let updatedTide = `${icon} ${temp}° ${tideInfo.HIGH_TIDE.substring(2)}`;
+  let updatedTide = `${icon} ${temp}° ${tideInfo.substring(2)}`;
   return updatedTide;
 }
 
@@ -36,7 +36,7 @@ async function getWeather(station, predictions) {
 	}
   // get the response body (the method explained below)
   let json = await response.json();
-  tides.innerText = predictions.map(p => getWeatherData(json, p)).join('\n');
+  tides.innerText = predictions.map(p => getWeatherData(json, p.HIGH_TIDE)).join('\n');
 }
 
 function geoFindMe() {
