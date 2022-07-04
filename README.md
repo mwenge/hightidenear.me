@@ -1,4 +1,4 @@
-# Tide App for Ireland
+# hightidenear.me
 Gives the high tide times for the nearest location to you.
 
 ## Build
