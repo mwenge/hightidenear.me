@@ -12,7 +12,7 @@ html, body {
 .item {
   width: 100%;
   text-align: center;
-  font-size: 5vw;
+  font-size: 7vw;
 	display: none;
 }
 .banner {
@@ -46,6 +46,6 @@ html, body {
   background-color: black;
   color: white;
   margin: 0;
-	width: 80%;
+	width: 100%;
 }
 
