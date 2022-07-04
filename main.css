@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap');
-body {
+html, body {
+  height: 100%;
+  background-color: black;
 }
 * {
   margin: 0;
@@ -10,11 +12,11 @@ body {
 .item {
   width: 100%;
   text-align: center;
-  font-size: 8vw;
+  font-size: 4vh;
 	display: none;
 }
 .banner {
-  font-size: 7vw;
+  font-size: 4vh;
   position: absolute;
   width: 100%;
   text-align: center;
@@ -25,13 +27,17 @@ body {
   z-index: 999;
 }
 .container {
+  padding-top: 15%;
   background-color: black;
   color: white;
-  position: relative;
-  height: 100vh;
-	width: 100vw;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
 }
 .share {
+  padding: 5px;
   background-color: white;
   color: black;
   border-radius: 5px;
@@ -44,10 +50,9 @@ body {
 }
 
 .centered {
+  background-color: black;
+  color: white;
   margin: 0;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-	width: 100%;
+	width: 60%;
 }
 
