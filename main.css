@@ -12,22 +12,16 @@ html, body {
 .item {
   width: 100%;
   text-align: center;
-  font-size: 4vh;
+  font-size: 5vw;
 	display: none;
 }
 .banner {
-  font-size: 4vh;
-  position: absolute;
-  width: 100%;
-  text-align: center;
+  font-size: 6vw;
   text-transform: uppercase;
-  top: 0;
   background: black;
   color: white;
-  z-index: 999;
 }
 .container {
-  padding-top: 15%;
   background-color: black;
   color: white;
   flex-direction: column;
@@ -44,7 +38,6 @@ html, body {
   position: relative;
   display: none;
   left: 50%;
-  font-size: 20px;
   transform: translateX(-50%);
   cursor: pointer;
 }
@@ -53,6 +46,6 @@ html, body {
   background-color: black;
   color: white;
   margin: 0;
-	width: 60%;
+	width: 80%;
 }
 
