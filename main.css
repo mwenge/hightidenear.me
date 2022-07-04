@@ -12,11 +12,11 @@ html, body {
 .item {
   width: 100%;
   text-align: center;
-  font-size: 7vw;
+  font-size: 4vh;
 	display: none;
 }
 .banner {
-  font-size: 6vw;
+  font-size: 3vh;
   text-transform: uppercase;
   background: black;
   color: white;
@@ -29,6 +29,7 @@ html, body {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  height: 80%;
 }
 .share {
   padding: 5px;
