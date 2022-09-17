@@ -66,12 +66,32 @@ function geoFindMe() {
 
     // Display the share button.
     share.style.display = "inline-block";
-    share.onclick = ()=> {
-      navigator.clipboard.writeText("High Tide " + prettydate.innerText + "\n" +
-        station.innerText + '\n' + 
-        tides.innerText + '\n' +
-        "https://hightidenear.me");
-      share.innerHTML = "Copied to Clipboard!";
+    share.onclick = async ()=> {
+      function copyToClipboard(shareData) {
+        navigator.clipboard.writeText( `${shareData.title}\n${shareData.text}\n${shareData.url}`);
+        copied.className = "copied visible";
+        document.body.offsetTop;
+        setTimeout(()=> {
+          copied.className = "copied hidden";
+        }, 1000);
+      }
+      let shareData = {
+        title: `High Tide`,
+        text: `${prettydate.innerText}\n${station.innerText}\n${tides.innerText}\n`,
+        url: "https://hightidenear.me",
+      }
+      console.log(`Sharing ${JSON.stringify(shareData)}`);
+
+      if (!navigator.canShare || !navigator.canShare(shareData)) {
+        copyToClipboard(shareData);
+        return;
+      }
+
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        copyToClipboard(shareData);
+      }
     }; 
 
     // Get the weather forecast.

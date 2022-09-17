@@ -50,3 +50,22 @@ html, body {
 	width: 100%;
 }
 
+.copied {
+  visibility: hidden;
+  background-color: #121213;
+  color: white;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 5px;
+  padding: 5px;
+}
+.visible {
+  visibility: visible;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
