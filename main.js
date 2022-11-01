@@ -82,7 +82,7 @@ function geoFindMe() {
       }
       console.log(`Sharing ${JSON.stringify(shareData)}`);
 
-      if (!navigator.canShare || !navigator.canShare(shareData)) {
+      if (!navigator.canShare || !navigator.canShare(shareData.text)) {
         copyToClipboard(shareData);
         return;
       }
